@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница аккаунта</title>
+</head>
+<body>
+Вы вошли как <label th:text="${person.name} + ' ' + ${person.surname}">123</label>
+<br><br>
+<button>
+  <a th:href="@{/client-side/get-order}">Сделать заказ</a>
+</button>
+<button>
+    <a th:href="@{/client-side/orders}">Мои заказы</a>
+</button>
+<button>
+  <a th:href="@{/logout}">Выйти из аккаунта</a>
+</button>
+</body>
+</html>

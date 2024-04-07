@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница обновления десерта</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/admin/cakes}">Выйти из панели обновления</a>
+</button>
+<form th:object="${cake}" th:method="patch" th:action="@{/admin/cakes/update}">
+    <input type="hidden" name="id" th:value="*{id}">
+    <label for="name">Название:</label>
+    <input type="text" id="name" th:field="*{name}">
+    <a style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">не видно</a>
+    <br>
+    <label for="price">Цена:</label>
+    <input type="text" id="price" th:field="*{price}">
+    <a style="color:red" th:if="${#fields.hasErrors('price')}" th:onerror>Некорректная стоимость товара</a>
+    <br>
+    <input type="submit" value="Обновить">
+</form>
+</body>
+</html>

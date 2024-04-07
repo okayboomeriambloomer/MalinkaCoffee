@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Архив заказов</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/admin}">Вернуться в меню</a>
+</button>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Номер телефона</th>
+        <th>Адрес кофейни</th>
+        <th>Телефон точки</th>
+        <th>Менеджер</th>
+        <th>Напиток</th>
+        <th>Закуска</th>
+        <th>Сумма заказа</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="historyOrder:${historyOrders}">
+        <td th:text="${historyOrder.person.name}"/>
+        <td th:text="${historyOrder.person.surname}"/>
+        <td th:text="${historyOrder.person.telephoneNumber}"/>
+        <td th:text="${historyOrder.coffeePoint.address}"/>
+        <td th:text="${historyOrder.coffeePoint.telephoneNumber}"/>
+        <td th:text="${historyOrder.coffeePoint.getManagerName}"/>
+        <td th:if="${historyOrder.drink} != null" th:text="${historyOrder.drink.name} + ' ' + ${historyOrder.drink.volume.volume} + ' мл'"/>
+        <td th:if="${historyOrder.drink} == null" th:text="'Без напитка'"/>
+        <td th:if="${historyOrder.cake} != null" th:text="${historyOrder.cake.name}"/>
+        <td th:if="${historyOrder.cake} == null" th:text="'Без закуски'"/>
+        <td th:text="${historyOrder.orderAmount}"/>
+        <td th:text="${#temporals.format(historyOrder.date, 'dd.MM.yyyy HH:mm')}"/>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница оформления заказа</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/client-side}">Отказаться от заполнения заказа</a>
+</button>
+<br><br>
+<form th:action="@{/client-side/get-order-processing}" th:method="POST">
+    <label for="drinks">Выберите напиток</label>
+    <select id="drinks" th:name="drinkId">
+        <option
+                th:each="drink : ${drinks}"
+                th:value="${drink.id}"
+                th:selected="${drink.id}==${drinkId}"
+                th:text="${drink.name} + ' ' + ${drink.volume.volume} + ' мл ' + ${drink.price} + ' рублей'">
+        </option>
+    </select>
+    <label for="cakes">Выберите закуску</label>
+    <select id="cakes" th:name="cakeId">
+        <option
+                th:each="cake : ${cakes}"
+                th:value="${cake.id}"
+                th:selected="${cake.id}==${cakeId}"
+                th:text="${cake.name} + ' ' + ${cake.price} + ' рублей'">
+        </option>
+    </select>
+    <br>
+    <label for="drinkCheck">Без напитка</label>
+    <input type="checkbox" id="drinkCheck" th:checked="${noDrink}" th:name="noDrink">
+    <br>
+    <label for="cakeCheck">Без закуски</label>
+    <input type="checkbox" id="cakeCheck" th:checked="${noCake}" th:name="noCake">
+    <br>
+    <a style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">не видно</a>
+    <label for="station">Выберите точку, где заберете заказ:</label>
+    <select id="station" th:name="coffeePointId">
+        <option
+                th:each="coffeePoint : ${coffeePoints}"
+                th:value="${coffeePoint.id}"
+                th:selected="${coffeePoint.id}==${coffeePointId}"
+                th:text="${coffeePoint.address} + ' ' + '. Телефон: ' + ${coffeePoint.telephoneNumber}">
+        </option>
+    </select>
+    <br><br>
+    <div>
+        <label for="date">Выберите дату, когда заберёте заказ</label>
+        <input id="date" type="datetime-local" th:value="${date}" th:name="date"/>
+    </div>
+    <br>
+    <button type="submit" class="button">Перейти к итого</button>
+</form>
+</body>
+</html>

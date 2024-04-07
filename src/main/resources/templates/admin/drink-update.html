@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница обновления напитка</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/admin/drinks}">Выйти из панели создания</a>
+</button>
+<form th:object="${drink}" th:method="patch" th:action="@{/admin/drinks/update}">
+    <input type="hidden" name="id" th:value="*{id}">
+    <label for="name">Название:</label>
+    <input type="text" id="name" th:field="*{name}">
+    <br>
+    <label for="volume">Выберите объем:</label>
+    <select id="volume" th:name="volumeId">
+        <option
+                th:each="volume : ${volumes}"
+                th:value="${volume.id}"
+                th:selected="${volume.id}==${volumeId}"
+                th:text="${volume.volume} + ' мл'">
+        </option>
+    </select>
+    <br>
+    <a style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">не видно</a>
+    <br>
+    <label for="price">Цена:</label>
+    <input type="text" id="price" th:field="*{price}">
+    <a style="color:red" th:if="${#fields.hasErrors('price')}" th:onerror>Некорректная стоимость товара</a>
+    <br>
+    <input type="submit" value="Обновить">
+</form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница с имеющимися десертами</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/admin}">Вернуться в меню</a>
+</button>
+<br><br>
+<button>
+    <a th:href="@{/admin/cakes/new}">Добавить новый десерт</a>
+</button>
+<br> <br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Цена</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cake:${cakes}">
+        <td th:text="${cake.name}"/>
+        <td th:text="${cake.price}"/>
+        <td>
+            <form th:action="@{/admin/cakes/{id}(id=${cake.id})}" th:method="get">
+                <button type="submit" class="button">Обновить данные о десерте</button>
+            </form>
+        </td>
+        <td>
+            <form  th:action="@{/admin/cakes/{id}(id=${cake.id})}" th:method="delete">
+                <button type="submit" class="button">Удалить десерт</button>
+            </form>
+        </td>
+    </tbody>
+</table>
+</body>
+</html>

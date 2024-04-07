@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница регистрации</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/}">Отменить регистрацию</a>
+</button>
+<br><br>
+<form th:action="@{/register}" th:method="POST">
+    <div>Введите контактные данные:</div>
+    <input th:name="name" th:value="${person.name}" placeholder="Имя">
+    <a style="color:red" th:if="${#fields.hasErrors('person.name')}" th:errors="${person.name}">етого никто не увидит</a>
+    <br>
+    <input th:name="surname" th:value="${person.surname}" placeholder="Фамилия">
+    <a style="color:red" th:if="${#fields.hasErrors('person.surname')}" th:errors="${person.surname}">етого никто не увидит</a>
+    <br>
+    <input th:name="telephoneNumber" th:value="${person.telephoneNumber}" placeholder="Номер телефона">
+    <a style="color:red" th:if="${#fields.hasErrors('person.telephoneNumber')}" th:errors="${person.telephoneNumber}">етого никто не увидит</a>
+    <br>
+    <input type="password" th:name="password" th:value="${person.password}" placeholder="Пароль">
+    <a style="color:red" th:if="${#fields.hasErrors('person.password')}" th:errors="${person.password}">етого никто не увидит</a>
+    <br>
+    <a style="color:red" th:if="${#fields.hasErrors('person.id')}" th:errors="${person.id}">етого никто не увидит</a>
+    <button type="submit" class="button">Зарегистрироваться</button>
+</form>
+</body>
+</html>

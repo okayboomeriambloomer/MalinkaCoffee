@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница обновления точки</title>
+</head>
+<body>
+<button>
+    <a th:href="@{/admin/coffee-points}">Выйти из панели обновления</a>
+</button>
+<form th:object="${coffeePoint}" th:method="patch" th:action="@{/admin/coffee-points/{id}(id=${coffeePoint.id})}">
+    <input type="hidden" name="id" th:value="*{id}">
+    <label for="address">Адрес точки:</label>
+    <input type="text" id="address" th:field="*{address}">
+    <a style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">не видно</a>
+    <br>
+    <label for="manager-name">Имя управляющего:</label>
+    <input type="text" id="manager-name" th:field="*{managerName}">
+    <a style="color:red" th:if="${#fields.hasErrors('managerName')}" th:errors="*{managerName}">не видно</a>
+    <br>
+    <label for="number-phone">Номер телефона:</label>
+    <input type="text" id="number-phone" th:field="*{telephoneNumber}">
+    <a style="color:red" th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}">не видно</a>
+    <br>
+    <input type="submit" value="Обновить">
+</form>
+</body>
+</html>

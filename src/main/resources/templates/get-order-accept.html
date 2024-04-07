@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница подтверждения заказа</title>
+</head>
+<body>
+<form  th:action="@{/client-side/get-order}" th:method="GET">
+    <input type="hidden" name="cakeId" th:value="${cake.id}">
+    <input type="hidden" name="drinkId" th:value="${drink.id}">
+    <input type="hidden" name="coffeePointId" th:value="${coffeePoint.id}">
+    <input type="hidden" name="date" th:value="${date}">
+    <input type="hidden" name="isDrink" th:value="${isDrink}">
+    <input type="hidden" name="isCake" th:value="${isCake}">
+    <button type="submit" class="button">Изменить заказ</button>
+</form>
+<form th:action="@{/client-side/get-order-accept}" th:method="POST">
+    <input type="hidden" name="cakeId" th:value="${cake.id}">
+    <input type="hidden" name="drinkId" th:value="${drink.id}">
+    <input type="hidden" name="coffeePointId" th:value="${coffeePoint.id}">
+    <input type="hidden" name="date" th:value="${date}">
+    <input type="hidden" name="isDrink" th:value="${isDrink}">
+    <input type="hidden" name="isCake" th:value="${isCake}">
+    <input type="hidden" name="orderAmount" th:value="${orderAmount}">
+    Состав заказа:
+    <br>
+    <label th:if="${isDrink}" th:text="${drink.name} + ' ' + ${drink.volume.volume + ' мл'}">123</label>
+    <br>
+    <label th:if="${isCake}" th:text="${cake.name}">123</label>
+    <br> <br>
+    Сумма заказа: <label th:text="${orderAmount} + ' рублей'">123</label> <br>
+    Заказ в кофейне по адресу: <label th:text="${coffeePoint.address}">123</label> <br>
+    Телефон менеджера: <label th:text="${coffeePoint.telephoneNumber} + ' ' + ${coffeePoint.getManagerName}">123</label> <br>
+    Вы подойдете ко времени: <label th:text="${#temporals.format(date, 'HH:mm')}">123</label> <br>
+    <button type="submit" class="button">Оформить заказ</button>
+</form>
+</body>
+</html>

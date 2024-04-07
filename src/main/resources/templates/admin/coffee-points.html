@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица точек</title>
+</head>
+<body>
+<button>
+  <a th:href="@{/admin}">Вернуться в меню</a>
+</button>
+<br><br>
+<button>
+  <a th:href="@{/admin/coffee-points/new}">Открыть новую точку</a>
+</button>
+<br> <br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Адрес кофейни</th>
+    <th>Менеджер</th>
+    <th>Телефон точки</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="coffeePoint:${coffeePoints}">
+    <td th:text="${coffeePoint.address}"/>
+    <td th:text="${coffeePoint.managerName}"/>
+    <td th:text="${coffeePoint.telephoneNumber}"/>
+    <td>
+      <form th:action="@{/admin/coffee-points/{id}(id=${coffeePoint.id})}" th:method="get">
+        <button type="submit" class="button">Обновить данные</button>
+      </form>
+    </td>
+    <td>
+      <form  th:action="@{/admin/coffee-points/{id}(id=${coffeePoint.id})}" th:method="delete">
+        <button type="submit" class="button">Закрыть точку</button>
+      </form>
+    </td>
+  </tbody>
+</table>
+</body>
+</html>
